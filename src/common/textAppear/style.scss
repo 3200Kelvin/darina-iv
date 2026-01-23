@@ -1,0 +1,27 @@
+.text-appear {
+    --transition-time: 1s;
+    --transition: var(--transition-time) ease;
+
+    &__line {
+        --delay: 0s;
+        transform: translateY(140%) rotateZ(1deg);
+
+        &:empty {
+            height: 1em;
+        }
+    }
+
+    > *:not(:first-child) {
+        text-indent: 0;
+    }
+
+    &__transition &__line {
+        will-change: transform;
+        transition: var(--transition-time) ease;
+        transition-delay: var(--delay);
+    }
+
+    &__appeared &__line {
+        transform: translateY(0%) rotateZ(0deg);
+    }
+}

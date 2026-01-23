@@ -5,18 +5,9 @@ import { getPageNamespace } from "./src/common/helpers";
 
 const MODULE_MAP = {
     home: 'main',
-    about: 'about',
-    media: 'media',
-    solutions: 'solutions',
-    solution: 'solution',
-    contact: 'contact',
-    signup: 'memberstackSignup',
-    'members-area': 'memberstackAccount',
-    intelligence: 'intelligence',
-    article: 'article',
 };
 
-if (gsap) {
+if ('gsap' in window) {
     gsap.defaults({
         duration: 0,
         ease: 'power2.inOut'

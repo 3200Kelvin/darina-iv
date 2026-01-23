@@ -1,5 +1,5 @@
 (function useVersion() {
-    const PROD_ORIGIN = 'https://www.iwcglobal.net';
+    const PROD_ORIGIN = 'https://www.darina-iv.com';
 
     if (window.location.origin === PROD_ORIGIN) {
         setProdScripts();

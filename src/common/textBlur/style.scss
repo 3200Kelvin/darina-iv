@@ -1,0 +1,24 @@
+.text-unblur {
+    --transition-time: 1s;
+    --transition: var(--transition-time) ease;
+
+    &__line {
+        &:empty {
+            height: 1em;
+        }
+    }
+
+    &__word {
+        opacity: 0;
+    }
+
+    &--transition &__word {
+        will-change: opacity;
+        transition: opacity var(--transition);
+        transition-delay: var(--delay);
+    }
+
+    &--appeared &__word {
+        opacity: 1;
+    }
+}

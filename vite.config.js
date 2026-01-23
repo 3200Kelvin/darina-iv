@@ -20,12 +20,10 @@ export default defineConfig(({ mode }) => {
     let base = './'; // default for development
   
     if (mode === 'staging') {
-        base = 'https://3200kelvin.github.io/IWC/dist/';
+        base = 'https://3200kelvin.github.io/darina-iv/dist/';
     } else if (mode === 'production') {
-        base = 'https://www.iwcglobal.net/app/';
+        base = 'https://www.darina-iv.com/app/';
     }
-
-    console.log(base);
 
     return {
         base,

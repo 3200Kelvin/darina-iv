@@ -1,0 +1,18 @@
+.preloader {
+    .heading--preloader {
+        overflow: hidden;
+    }
+
+    &__title__h {
+        position: relative;
+        display: inline-block;
+
+        &::after {
+            display: block;
+            content: 'W';
+            position: absolute;
+            top: 100%;
+            right: 0;
+        }
+    }
+}

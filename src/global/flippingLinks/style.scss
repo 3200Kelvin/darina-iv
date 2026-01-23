@@ -1,0 +1,21 @@
+@media (hover: hover) {
+    .flipping-link {
+        overflow: hidden;
+
+        > * {
+            position: relative;
+            transition: 0.4s var(--easing);
+
+            &::after {
+                content: attr(data-label);
+                position: absolute;
+                top: 100%;
+                left: 0;
+            }
+        }
+
+        &:hover > * {
+            transform: translateY(-100%);
+        }
+    }
+}

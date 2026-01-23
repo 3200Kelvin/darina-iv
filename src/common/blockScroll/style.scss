@@ -1,0 +1,18 @@
+html {
+    overflow: auto;
+}
+.block-scroll {
+    overflow: hidden;
+
+    @media screen and (min-width: 1000px) {
+        padding-right: var(--scroll-bar-width, 0);
+
+        [compensate-scrollbar] {
+            padding-right: var(--scroll-bar-width, 0);
+        }
+
+        [compensate-scrollbar-fixed] {
+            transform: translateX(calc(-1 * var(--scroll-bar-width, 0) / 2));
+        }
+    }
+}
