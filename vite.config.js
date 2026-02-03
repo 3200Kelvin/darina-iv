@@ -27,6 +27,11 @@ export default defineConfig(({ mode }) => {
 
     return {
         base,
+        resolve: {
+            alias: {
+                '@': path.resolve(__dirname, './src'),
+            },
+        },
         server: {
             fs: {
                 allow: ['.'], // allow serving files from project root

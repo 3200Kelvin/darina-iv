@@ -1,5 +1,6 @@
 import { usePreloader } from "./preloader";
 import { useMenu } from "./menu";
+import { useCartCustomization } from "./cart";
 import { useTextBlur, useTextAppear } from "./textAnimations";
 import { useSafariForceRepaint } from "./forceRepaint";
 import { setScrollBarWidthListener } from "../common/blockScroll";
@@ -14,6 +15,7 @@ export const useGlobalOnceScripts = () => {
     usePreloader();
     setScrollBarWidthListener();
     useMenu();
+    useCartCustomization();
 };
 
 export const useGlobalScripts = () => {

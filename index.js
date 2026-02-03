@@ -4,7 +4,9 @@ import { postReadyEvent } from "./src/global/preloader";
 import { getPageNamespace } from "./src/common/helpers";
 
 const MODULE_MAP = {
-    home: 'main',
+    // home: 'home',
+    product: 'product',
+    checkout: 'checkout',
 };
 
 if ('gsap' in window) {

@@ -22,6 +22,17 @@ export const usePageTransitions = (runScripts = async () => {}) => {
 
     try {
         barba.init({
+            prevent: ({ el }) => {
+                const preventElement = el?.closest?.('[data-barba-prevent]');
+
+                if (!preventElement) {
+                    return false;
+                }
+
+                const value = preventElement.getAttribute('data-barba-prevent');
+
+                return value === '' || value === 'true' || value === '1';
+            },
             transitions: [
                 {
                     name: 'transition',
@@ -38,7 +49,7 @@ export const usePageTransitions = (runScripts = async () => {}) => {
         barba.hooks.beforeLeave((data) => {
             hash = data.trigger.hash || null;
             scrollPosition = getScrollPosition();
-            stopSctoll();
+            stopScroll();
         });
         
         barba.hooks.beforeEnter((data) => {
@@ -110,7 +121,7 @@ export const usePageTransitions = (runScripts = async () => {}) => {
             });
     };
 
-    function stopSctoll() {
+    function stopScroll() {
         if (lenis) {
             lenis.stop();
         }

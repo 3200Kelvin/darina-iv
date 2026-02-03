@@ -1,5 +1,6 @@
 (function useVersion() {
     const PROD_ORIGIN = 'https://www.darina-iv.com';
+    const STAGING_ORIGIN = 'https://3200kelvin.github.io/darina-iv';
 
     if (window.location.origin === PROD_ORIGIN) {
         setProdScripts();
@@ -38,8 +39,8 @@
         document.body.setAttribute('data-mode', 'staging');
         const timestamp = new Date().getTime();
 
-        const script = getScript(`https://3200kelvin.github.io/IWC/dist/index.js?v=${timestamp}`);
-        const style1 = getStyle(`https://3200kelvin.github.io/IWC/dist/index.css?v=${timestamp}`);
+        const script = getScript(`${STAGING_ORIGIN}/index.js?v=${timestamp}`);
+        const style1 = getStyle(`${STAGING_ORIGIN}/index.css?v=${timestamp}`);
 
         appendElement([script, style1]);
     }
