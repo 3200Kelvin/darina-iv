@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => {
     if (mode === 'staging') {
         base = 'https://3200kelvin.github.io/darina-iv/dist/';
     } else if (mode === 'production') {
-        base = 'https://www.darina-iv.com/app/';
+        base = 'https://www.darina-iv.com/app/files/';
     }
 
     return {

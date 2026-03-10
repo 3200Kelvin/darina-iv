@@ -8,6 +8,14 @@ export const useProductCustomInputs = (container) => {
     const currentCustomizationData = {};
 
     const cleanups = [...inputs].map((input) => {
+        const field = input.closest('.product__field');
+        if (field) {
+            const placeholder = field.querySelector('.product__field__placeholder')?.textContent;
+            if (placeholder) {
+                input.setAttribute('placeholder', placeholder);
+            }
+        }
+
         input.addEventListener('input', onInputDataChange);
 
         return () => input.removeEventListener('input', onInputDataChange);

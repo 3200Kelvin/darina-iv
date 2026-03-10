@@ -7,6 +7,7 @@ import { setScrollBarWidthListener } from "../common/blockScroll";
 import { getCleanup } from "../common/helpers";
 import { setSmoothScroll } from "../common/smoothScroll";
 import { useFlippingLinks } from "./flippingLinks";
+import { useCookieConsent } from "./cookieConcent";
 
 import './style.scss';
 
@@ -16,6 +17,7 @@ export const useGlobalOnceScripts = () => {
     setScrollBarWidthListener();
     useMenu();
     useCartCustomization();
+    useCookieConsent();
 };
 
 export const useGlobalScripts = () => {

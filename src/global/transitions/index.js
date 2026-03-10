@@ -22,17 +22,17 @@ export const usePageTransitions = (runScripts = async () => {}) => {
 
     try {
         barba.init({
-            prevent: ({ el }) => {
-                const preventElement = el?.closest?.('[data-barba-prevent]');
+            // prevent: ({ el }) => {
+            //     const preventElement = el?.closest?.('[data-barba-prevent]');
 
-                if (!preventElement) {
-                    return false;
-                }
+            //     if (!preventElement) {
+            //         return false;
+            //     }
 
-                const value = preventElement.getAttribute('data-barba-prevent');
+            //     const value = preventElement.getAttribute('data-barba-prevent');
 
-                return value === '' || value === 'true' || value === '1';
-            },
+            //     return value === '' || value === 'true' || value === '1';
+            // },
             transitions: [
                 {
                     name: 'transition',

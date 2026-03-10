@@ -9,7 +9,7 @@
     "build:staging": "vite build --mode staging",
     "build:prod": "vite build --mode production",
     "deploy": "npm run build:staging && git add . && git commit -a -m\"deploy\" && git push",
-    "deploy:prod": "npm run build:prod && rm -rf ../backend/public/* && cp -r dist/* ../backend/public/ && npm --prefix ../backend run deploy"
+    "deploy:prod": "npm run build:prod && rm -rf ../backend/public/files/* && cp -r dist/* ../backend/public/files/ && npm --prefix ../backend run deploy"
   },
   "author": "",
   "license": "ISC",

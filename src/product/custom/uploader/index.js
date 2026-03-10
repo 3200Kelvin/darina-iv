@@ -80,6 +80,8 @@ export const useFileUploader = (container) => {
         config.setAttribute('source-list', 'local, camera');
         config.setAttribute('clearable', 'true');
         config.setAttribute('multiple', 'true');
+        config.setAttribute('multiple-min', '3');
+        config.setAttribute('multiple-max', '15');
         document.body.appendChild(config);
 
         const ctx = document.createElement('uc-upload-ctx-provider');

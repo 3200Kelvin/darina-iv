@@ -40,14 +40,14 @@
         const timestamp = new Date().getTime();
 
         const script = getScript(`${STAGING_ORIGIN}/index.js?v=${timestamp}`);
-        const style1 = getStyle(`${STAGING_ORIGIN}/index.css?v=${timestamp}`);
+        const style = getStyle(`${STAGING_ORIGIN}/index.css?v=${timestamp}`);
 
-        appendElement([script, style1]);
+        appendElement([script, style]);
     }
 
     function setProdScripts() {
-        const script = getScript('/app/index.js');
-        const style = getStyle('/app/index.css');
+        const script = getScript('/app/files/index.js');
+        const style = getStyle('/app/files/index.css');
 
         appendElement([script, style]);
     }
