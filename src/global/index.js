@@ -1,5 +1,6 @@
 import { usePreloader } from "./preloader";
 import { useMenu } from "./menu";
+import { usePopups } from "./popup";
 import { useCartCustomization } from "./cart";
 import { useTextBlur, useTextAppear } from "./textAnimations";
 import { useSafariForceRepaint } from "./forceRepaint";
@@ -26,5 +27,6 @@ export const useGlobalScripts = () => {
         useTextAppear(),
         useSafariForceRepaint(),
         useFlippingLinks(),
+        usePopups(),
     );
 };

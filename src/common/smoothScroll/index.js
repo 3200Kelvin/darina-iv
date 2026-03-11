@@ -61,7 +61,7 @@ function configureLenis(Lenis) {
         wheelMultiplier: 1,
         touchMultiplier: 1,
         autoRaf: true,
-        // prevent: (node) => !!node.closest('.form__dropdown'),
+        prevent: (node) => !!node.closest('.popup'),
     });
 
     document.addEventListener('DOMContentLoaded', scrollToAnchor);
