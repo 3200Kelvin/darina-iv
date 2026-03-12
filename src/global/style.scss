@@ -33,3 +33,13 @@
         }
     }
 }
+
+[data-style="corner-shape"] {
+    corner-shape: scoop;
+}
+
+@supports not (corner-shape: scoop) {
+    [data-style="corner-shape"] {
+        border-radius: 0;
+    }
+}

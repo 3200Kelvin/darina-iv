@@ -9,6 +9,7 @@ import { getCleanup } from "../common/helpers";
 import { setSmoothScroll } from "../common/smoothScroll";
 import { useFlippingLinks } from "./flippingLinks";
 import { useCookieConsent } from "./cookieConcent";
+import { useLocalization } from "./localization";
 
 import './style.scss';
 
@@ -23,6 +24,7 @@ export const useGlobalOnceScripts = () => {
 
 export const useGlobalScripts = () => {
     return getCleanup(
+        useLocalization(),
         useTextBlur(),
         useTextAppear(),
         useSafariForceRepaint(),

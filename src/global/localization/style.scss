@@ -1,0 +1,33 @@
+[data-locale='EN'],
+[data-locale='en'] {
+    display: block;
+}
+
+[data-locale='FR'],
+[data-locale='fr'] {
+    display: none;
+}
+
+html[data-locale-current='EN'] {
+    [data-locale='EN'],
+    [data-locale='en'] {
+        display: block;
+    }
+    
+    [data-locale='FR'],
+    [data-locale='fr'] {
+        display: none;
+    }
+}
+
+html[data-locale-current='FR'] {
+    [data-locale='FR'],
+    [data-locale='fr'] {
+        display: block;
+    }
+    
+    [data-locale='EN'],
+    [data-locale='en'] {
+        display: none;
+    }
+}

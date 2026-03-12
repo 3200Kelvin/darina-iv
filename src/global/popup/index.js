@@ -42,5 +42,5 @@ export const usePopups = () => {
         }
     });
 
-    return getCleanup(cleanups);
+    return getCleanup(...cleanups);
 };
