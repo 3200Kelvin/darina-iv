@@ -3,12 +3,24 @@ import * as UC from '@uploadcare/file-uploader';
 import './style.scss';
 
 export const useFileUploader = (container) => {
+    const MIN_PHOTOS = 3;
+    const MAX_PHOTOS = 15;
+
     const fileUploadContainer = container.querySelector('.product__file__container');
     const fileUploadInput = container.querySelector('#pets-photos');
     const fileUploadCountInput = container.querySelector('#pets-photos-count');
+
     if (!fileUploadContainer || !fileUploadInput || !fileUploadCountInput) {
+        console.error('File uploader: Required elements not found in the container.', {
+            fileUploadContainerExists: !!fileUploadContainer,
+            fileUploadInputExists: !!fileUploadInput,
+            fileUploadCountInputExists: !!fileUploadCountInput,
+        });
         return;
     }
+
+    fileUploadCountInput.setAttribute('min', MIN_PHOTOS);
+    fileUploadCountInput.setAttribute('max', MAX_PHOTOS);
 
     const triggerPlaceholder = container.querySelector('.product__file__trigger');
     const fileList = container.querySelector('.product__file__list');
@@ -29,7 +41,6 @@ export const useFileUploader = (container) => {
     };
 
     function onFileAdded(event) {
-        console.log(event);
         const { internalId, cdnUrl, name } = event.detail;
         files[internalId] = { internalId, cdnUrl, name };
         updateFileInput();
@@ -93,8 +104,8 @@ export const useFileUploader = (container) => {
         config.setAttribute('source-list', 'local, camera');
         config.setAttribute('clearable', 'true');
         config.setAttribute('multiple', 'true');
-        config.setAttribute('multiple-min', '3');
-        config.setAttribute('multiple-max', '15');
+        config.setAttribute('multiple-min', MIN_PHOTOS);
+        config.setAttribute('multiple-max', MAX_PHOTOS);
         document.body.appendChild(config);
 
         const ctx = document.createElement('uc-upload-ctx-provider');
