@@ -28,9 +28,7 @@ export const blockScroll = (className) => {
     if (className) {
         document.documentElement.classList.add(className);
     }
-    if (!isTouchscreen) {
-        window.lenis?.stop?.();
-    }
+    window.lenis?.stop?.();
 };
 
 export const unblockScroll = (className) => {
@@ -38,7 +36,5 @@ export const unblockScroll = (className) => {
     if (className) {
         document.documentElement.classList.remove(className);
     }
-    if (!isTouchscreen) {
-        window.lenis?.start();
-    }
+    window.lenis?.start();
 };
