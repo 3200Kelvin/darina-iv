@@ -44,9 +44,18 @@
     }
 }
 
+option {
+    padding: 1em;
+    background-color: var(--bg);
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--beige);
+    }
+}
+
 @supports (appearance: base-select) {
-    select,
-    ::picker(select) {
+    select {
         appearance: base-select;
     }
 
