@@ -1,4 +1,5 @@
 import barba from '@barba/core';
+import { animate } from 'motion';
 
 import { scrollTo, scrollToAnchor, getScrollPosition } from '../../common/smoothScroll';
 
@@ -15,8 +16,25 @@ export function sendTransitionEndEvent() {
     window.isTransitioning = false;
 }
 
+const createOverlay = () => {
+    const overlay = document.createElement('div');
+    overlay.id = 'page-transition';
+    overlay.style.position = 'fixed';
+    overlay.style.top = 0;
+    overlay.style.left = 0;
+    overlay.style.width = '100vw';
+    overlay.style.height = '100vh';
+    overlay.style.zIndex = 99;
+    overlay.style.backgroundColor = 'var(--bg)';
+    overlay.style.opacity = 0;
+    overlay.style.pointerEvents = 'none';
+    return overlay;
+}
+
 export const usePageTransitions = (runScripts = async () => {}) => {
-    const overlay = document.getElementById('page-transition');
+    const overlay = createOverlay();
+    document.body.appendChild(overlay);
+
     let scrollPosition = 0;
     let hash = null;
 
@@ -64,14 +82,14 @@ export const usePageTransitions = (runScripts = async () => {}) => {
         console.warn('Barba init error', error);
     }
 
-    function onLeave(data) {
+    async function onLeave(data) {
         if (isBack(data) || !overlay) {
             return Promise.resolve();
         }
 
         window.isTransitioning = true;
 
-        return Promise.resolve();
+        return animate(overlay, { opacity: [0, 1] }, { duration: 0.5 });
     };
 
     async function onEnter(data) {
@@ -91,8 +109,8 @@ export const usePageTransitions = (runScripts = async () => {}) => {
             return Promise.resolve();
         }
 
-        return Promise.resolve()
-            .add(() => {
+        return animate(overlay, { opacity: [1, 0] }, { duration: 0.5 })
+            .then(() => {
                 sendTransitionEndEvent();
             });
     };
