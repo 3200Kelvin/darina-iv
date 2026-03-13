@@ -135,13 +135,19 @@ export const usePageTransitions = (runScripts = async () => {}) => {
 };
 
 function resetWebflow(data) {
-    let parser = new DOMParser();
-    let dom = parser.parseFromString(data.next.html, "text/html");
-    let webflowPageId = dom.documentElement.getAttribute("data-wf-page");
+    const parser = new DOMParser();
+    const dom = parser.parseFromString(data.next.html, "text/html");
+    const webflowPageId = dom.documentElement.getAttribute("data-wf-page");
+    const siteId = dom.documentElement.getAttribute("data-wf-site");
+
     document.documentElement.setAttribute("data-wf-page", webflowPageId);
-    window.Webflow && window.Webflow.destroy();
-    window.Webflow && window.Webflow.ready();
-    window.Webflow && window.Webflow.require("ix2")?.init?.();
+
+    if (window.Webflow) {
+        window.Webflow.destroy();
+        window.Webflow.ready();
+        window.Webflow.require("ix2")?.init?.();
+        window.Webflow.require("commerce")?.init?.({ siteId });
+    }
     restartAutoplayedVideos();
 }
 

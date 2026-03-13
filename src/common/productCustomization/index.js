@@ -31,7 +31,6 @@ export function redrawCartItems(container, customizationData) {
     cartItems.forEach((item) => {
         const itemSkuElement = item.querySelector('[data-product-sku]');
         const itemSku = itemSkuElement.textContent.trim();
-        console.log(itemSku);
         redrawCartItem(item, customizationData[itemSku] || []);
     });
 }
