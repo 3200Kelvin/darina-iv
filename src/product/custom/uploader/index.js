@@ -5,7 +5,8 @@ import './style.scss';
 export const useFileUploader = (container) => {
     const fileUploadContainer = container.querySelector('.product__file__container');
     const fileUploadInput = container.querySelector('#pets-photos');
-    if (!fileUploadContainer || !fileUploadInput) {
+    const fileUploadCountInput = container.querySelector('#pets-photos-count');
+    if (!fileUploadContainer || !fileUploadInput || !fileUploadCountInput) {
         return;
     }
 
@@ -30,10 +31,9 @@ export const useFileUploader = (container) => {
     function onFileAdded(event) {
         console.log(event);
         const { internalId, cdnUrl, name } = event.detail;
-        const preview = createFIlePreview(internalId, cdnUrl, name);
-        files[internalId] = cdnUrl;
-        fileList.appendChild(preview);
+        files[internalId] = { internalId, cdnUrl, name };
         updateFileInput();
+        renderPreviews();
     }
 
     function onFileRemoved(event) {
@@ -43,12 +43,24 @@ export const useFileUploader = (container) => {
             fileList.removeChild(preview);
             delete files[internalId];
             updateFileInput();
+            renderPreviews();
         }
     }
 
-    function updateFileInput() {
-        const fileUrls = Object.values(files);
+    function renderPreviews() {
+        fileList.innerHTML = '';
 
+        Object.values(files).forEach(file => {
+            const { internalId, cdnUrl, name } = file;
+            const preview = createFIlePreview(internalId, cdnUrl, name);
+            fileList.appendChild(preview);
+        });
+    }
+
+    function updateFileInput() {
+        const fileUrls = Object.values(files).map(file => file.cdnUrl);
+
+        fileUploadCountInput.value = fileUrls.length;
         fileUploadInput.value = fileUrls.join(', ');
         fileUploadInput.dispatchEvent(new Event('input', { bubbles: true }));
     }
@@ -92,7 +104,8 @@ export const useFileUploader = (container) => {
         const uploadWidget = document.createElement('uc-file-uploader-regular');
         uploadWidget.setAttribute('ctx-name', 'my-uploader');
         uploadWidget.classList.add('uc-light');
-        fileUploadContainer.replaceChild(uploadWidget, triggerPlaceholder);
+        triggerPlaceholder.innerHTML = '';
+        triggerPlaceholder.appendChild(uploadWidget);
 
         return ctx;
     }
