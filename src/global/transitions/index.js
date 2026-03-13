@@ -22,17 +22,6 @@ export const usePageTransitions = (runScripts = async () => {}) => {
 
     try {
         barba.init({
-            // prevent: ({ el }) => {
-            //     const preventElement = el?.closest?.('[data-barba-prevent]');
-
-            //     if (!preventElement) {
-            //         return false;
-            //     }
-
-            //     const value = preventElement.getAttribute('data-barba-prevent');
-
-            //     return value === '' || value === 'true' || value === '1';
-            // },
             transitions: [
                 {
                     name: 'transition',
@@ -60,18 +49,6 @@ export const usePageTransitions = (runScripts = async () => {}) => {
             }
         });
         
-        // barba.hooks.enter(async (data) => {
-        //     reloadMemberstack();
-        //     startSctoll();
-        //     resetWebflow(data);
-        //     await runScripts();
-        //     if (isBack(data)) {
-        //         scrollTo(scrollPosition, true);
-        //     } else {
-        //         scrollToAnchor(hash, true);
-        //     }
-        // });
-        
         barba.hooks.after((data) => {
             if (isBack(data)) {
                 scrollTo(scrollPosition, true);
@@ -98,7 +75,6 @@ export const usePageTransitions = (runScripts = async () => {}) => {
     };
 
     async function onEnter(data) {
-        reloadMemberstack();
         startSctoll();
         resetWebflow(data);
 
@@ -158,19 +134,4 @@ function restartAutoplayedVideos() {
             video.play().catch(console.warn);
         }
     });
-}
-
-function reloadMemberstack() {
-    const old = document.querySelector('script[src*="memberstack"]');
-
-    if (old) {
-        const newScript = document.createElement('script');
-
-        for (const attr of old.attributes) {
-            newScript.setAttribute(attr.name, attr.value);
-        }
-        
-        old.remove();
-        document.head.appendChild(newScript);
-    }
 }

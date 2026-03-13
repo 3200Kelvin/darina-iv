@@ -9,13 +9,6 @@ const MODULE_MAP = {
     checkout: 'checkout',
 };
 
-if ('gsap' in window) {
-    gsap.defaults({
-        duration: 0,
-        ease: 'power2.inOut'
-    });
-}
-
 let isInitialized = false;
 let cleanup;
 window.isTransitioning = false;

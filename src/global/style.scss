@@ -43,3 +43,45 @@
         border-radius: 0;
     }
 }
+
+@supports (appearance: base-select) {
+    select,
+    ::picker(select) {
+        appearance: base-select;
+    }
+
+    select {
+        padding: 1em;
+        cursor: pointer;
+
+        &::picker(select) {
+            position: static;
+            position-area: block-end;
+            border: 1px solid var(--gray-300-30);
+            background-color: var(--bg);
+        }
+
+        &::picker-icon {
+            content: url(https://cdn.prod.website-files.com/6970e1b322f6f039ccc1ab16/69b3dfabfc7cdf965c1759c1_select-shevron.svg);
+            transition: 0.25s rotate;
+        }
+
+        &:open::picker-icon {
+            rotate: 180deg;
+        }
+
+        option {
+            padding: 0.5em 1em;
+            cursor: pointer;
+            transition: background-color 0.25s;
+
+            &::checkmark {
+                display: none;
+            }
+
+            &:hover {
+                background-color: var(--beige);
+            }
+        }
+    }
+}

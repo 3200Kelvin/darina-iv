@@ -1,3 +1,4 @@
+import { animate } from "motion";
 import { isLoaded, setIsLoaded } from "../../initial";
 import { blockScroll, unblockScroll } from "../../common/blockScroll";
 import { scrollTo } from "../../common/smoothScroll";
@@ -28,23 +29,16 @@ export const usePreloader = () => {
     document.addEventListener(READY_EVENT_NAME, animatePreloader);
 
     function hidePreloader() {
-        return gsap.timeline()
-            .to(preloader, { opacity: 0, duration: 0.6 })
-            .add(() => {
-                preloader.remove();
-                unblockScroll();
-                setIsLoaded();
-                sendTransitionEndEvent();
-            });
+        return animate(preloader, { opacity: 0 }, { duration: 0.6 }).finished.then(() => {
+            preloader.remove();
+            unblockScroll();
+            setIsLoaded();
+            sendTransitionEndEvent();
+        });
     }
 
     function animatePreloader() {
-        gsap.timeline()
-            .delay(0.5)
-            .to(letter, { transform: 'translateY(-100%)', duration: 1 })
-            .add(() => {
-                scrollTo(0, true);
-            })
-            .add(hidePreloader);
+        scrollTo(0, true);
+        return hidePreloader();
     }
 };

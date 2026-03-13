@@ -50,10 +50,6 @@ export const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgen
 
 export const isWeakDevice = isSafari || (window.navigator.deviceMemory || 0) < 4;
 
-export function getSetVariable(obj, value) {
-    return gsap.quickTo(obj, value, { duration: 0.8, ease: "power2.out" });
-}
-
 export const getRaf = () => {
     let raf = null;
 

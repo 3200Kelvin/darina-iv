@@ -28,6 +28,7 @@ export const useFileUploader = (container) => {
     };
 
     function onFileAdded(event) {
+        console.log(event);
         const { internalId, cdnUrl, name } = event.detail;
         const preview = createFIlePreview(internalId, cdnUrl, name);
         files[internalId] = cdnUrl;

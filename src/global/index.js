@@ -1,4 +1,4 @@
-import { usePreloader } from "./preloader";
+// import { usePreloader } from "./preloader";
 import { useMenu } from "./menu";
 import { usePopups } from "./popup";
 import { useCartCustomization } from "./cart";
@@ -15,7 +15,7 @@ import './style.scss';
 
 export const useGlobalOnceScripts = () => {
     setSmoothScroll();
-    usePreloader();
+    // usePreloader();
     setScrollBarWidthListener();
     useMenu();
     useCartCustomization();
