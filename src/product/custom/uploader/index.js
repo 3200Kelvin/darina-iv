@@ -109,7 +109,7 @@ export const useFileUploader = (container) => {
 
         const config = document.createElement('uc-config');
         config.setAttribute('ctx-name', 'my-uploader');
-        config.setAttribute('pubkey', 'df9ac222f632ba196d17'); // 1fc743a44b252889ac0b
+        config.setAttribute('pubkey', '1fc743a44b252889ac0b'); // дарины 1fc743a44b252889ac0b | мой df9ac222f632ba196d17
         config.setAttribute('source-list', 'local, camera');
         config.setAttribute('clearable', 'true');
         config.setAttribute('multiple', 'true');
