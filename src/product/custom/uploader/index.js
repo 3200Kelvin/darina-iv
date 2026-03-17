@@ -28,6 +28,7 @@ export const useFileUploader = (container) => {
     const files = {};
 
     const uploaderCtx = setUpUploader();
+    addUploadWidget();
     const uploaderAPI = uploaderCtx.getAPI();
 
     uploaderCtx.addEventListener('file-upload-success', onFileAdded);
@@ -85,6 +86,14 @@ export const useFileUploader = (container) => {
         }
     }
 
+    function addUploadWidget() {
+        const uploadWidget = document.createElement('uc-file-uploader-regular');
+        uploadWidget.setAttribute('ctx-name', 'my-uploader');
+        uploadWidget.classList.add('uc-light');
+        triggerPlaceholder.innerHTML = '';
+        triggerPlaceholder.appendChild(uploadWidget);
+    }
+
     function setUpUploader() {
         const existingContext = document.querySelector('uc-upload-ctx-provider');
         if (existingContext) {
@@ -100,7 +109,7 @@ export const useFileUploader = (container) => {
 
         const config = document.createElement('uc-config');
         config.setAttribute('ctx-name', 'my-uploader');
-        config.setAttribute('pubkey', 'df9ac222f632ba196d17');
+        config.setAttribute('pubkey', 'df9ac222f632ba196d17'); // 1fc743a44b252889ac0b
         config.setAttribute('source-list', 'local, camera');
         config.setAttribute('clearable', 'true');
         config.setAttribute('multiple', 'true');
@@ -111,12 +120,6 @@ export const useFileUploader = (container) => {
         const ctx = document.createElement('uc-upload-ctx-provider');
         ctx.setAttribute('ctx-name', 'my-uploader');
         document.body.appendChild(ctx);
-
-        const uploadWidget = document.createElement('uc-file-uploader-regular');
-        uploadWidget.setAttribute('ctx-name', 'my-uploader');
-        uploadWidget.classList.add('uc-light');
-        triggerPlaceholder.innerHTML = '';
-        triggerPlaceholder.appendChild(uploadWidget);
 
         return ctx;
     }
