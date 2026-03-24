@@ -1,11 +1,11 @@
 [data-locale='EN'],
 [data-locale='en'] {
-    display: block;
+    display: none;
 }
 
 [data-locale='FR'],
 [data-locale='fr'] {
-    display: none;
+    display: block;
 }
 
 html[data-locale-current='EN'] {
