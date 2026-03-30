@@ -94,7 +94,7 @@ export const usePageTransitions = (runScripts = async () => {}) => {
 
     async function onEnter(data) {
         startSctoll();
-        resetWebflow(data);
+        await resetWebflow(data);
 
         // very important to wait for all the modules to get loaded
         await runScripts();
@@ -134,7 +134,7 @@ export const usePageTransitions = (runScripts = async () => {}) => {
     }
 };
 
-function resetWebflow(data) {
+async function resetWebflow(data) {
     const parser = new DOMParser();
     const dom = parser.parseFromString(data.next.html, "text/html");
     const webflowPageId = dom.documentElement.getAttribute("data-wf-page");
@@ -142,13 +142,34 @@ function resetWebflow(data) {
 
     document.documentElement.setAttribute("data-wf-page", webflowPageId);
 
+    await loadMissingScripts(dom);
+
     if (window.Webflow) {
         window.Webflow.destroy();
         window.Webflow.ready();
         window.Webflow.require("ix2")?.init?.();
         window.Webflow.require("commerce")?.init?.({ siteId });
+        window.Webflow.require("lightbox")?.ready?.();
     }
     restartAutoplayedVideos();
+}
+
+function loadMissingScripts(dom) {
+    const loaded = new Set(
+        [...document.querySelectorAll('script[src]')].map(s => s.getAttribute('src'))
+    );
+    const missing = [...dom.querySelectorAll('script[src]')]
+        .filter(s => !loaded.has(s.getAttribute('src')));
+
+    return Promise.all(
+        missing.map(script => new Promise(resolve => {
+            const el = document.createElement('script');
+            el.src = script.getAttribute('src');
+            el.onload = resolve;
+            el.onerror = resolve;
+            document.head.appendChild(el);
+        }))
+    );
 }
 
 function restartAutoplayedVideos() {
