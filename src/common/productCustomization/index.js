@@ -1,6 +1,7 @@
 import { setCookie, getCookie } from "../helpers/cookies";
 
 const COOKIE_NAME = 'product_customization';
+const LABEL_LOCALES = ['EN', 'FR'];
 
 export const CUSTOMIZATION_DATA_UPDATE_MESSAGE = 'customizationDataUpdate';
 
@@ -55,9 +56,22 @@ function redrawCartItem(item, customizationList) {
 }
 
 function drawItemParameter(key, data) {
-    const { value, label } = data;
+    const { value, label, localizedLabels = {} } = data || {};
     const paramItem = document.createElement('p');
     paramItem.setAttribute('data-product-item-param', key);
-    paramItem.textContent = `${key}: ${label || value}`;
+
+    LABEL_LOCALES.forEach((locale) => {
+        const localizedLabelElement = document.createElement('span');
+        localizedLabelElement.classList.add('inline');
+        localizedLabelElement.setAttribute('data-locale', locale);
+        localizedLabelElement.textContent = localizedLabels[locale] || key;
+        paramItem.appendChild(localizedLabelElement);
+    });
+
+    const separator = document.createTextNode(': ');
+    const valueText = document.createTextNode(label || value);
+    paramItem.appendChild(separator);
+    paramItem.appendChild(valueText);
+
     return paramItem;
 }

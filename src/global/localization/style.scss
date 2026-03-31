@@ -6,12 +6,20 @@
 [data-locale='FR'],
 [data-locale='fr'] {
     display: block;
+
+    &.inline {
+        display: inline;
+    }
 }
 
 html[data-locale-current='EN'] {
     [data-locale='EN'],
     [data-locale='en'] {
         display: block;
+
+        &.inline {
+            display: inline;
+        }
     }
     
     [data-locale='FR'],
@@ -24,6 +32,10 @@ html[data-locale-current='FR'] {
     [data-locale='FR'],
     [data-locale='fr'] {
         display: block;
+
+        &.inline {
+            display: inline;
+        }
     }
     
     [data-locale='EN'],

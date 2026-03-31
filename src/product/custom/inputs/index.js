@@ -30,8 +30,30 @@ export const useProductCustomInputs = (container) => {
         const key = input.name;
         const value = input.value;
         const label = formatInputValue(value, input.dataset.formatting);
-        currentCustomizationData[key] = { value, label };
+        const localizedLabels = getLocalizedLabels(input);
+        currentCustomizationData[key] = { value, label, localizedLabels };
         sendProductCustomizationUpdate(currentCustomizationData);
+    }
+
+    function getLocalizedLabels(input) {
+        const localizedLabels = {};
+
+        [...input.attributes].forEach((attribute) => {
+            if (!attribute.name.startsWith('data-label-')) {
+                return;
+            }
+
+            const locale = attribute.name.slice('data-label-'.length).trim().toUpperCase();
+            const localizedLabel = attribute.value?.trim();
+
+            if (!locale || !localizedLabel) {
+                return;
+            }
+
+            localizedLabels[locale] = localizedLabel;
+        });
+
+        return localizedLabels;
     }
 
     function formatInputValue(value, formatting) {
