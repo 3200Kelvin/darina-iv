@@ -17,6 +17,7 @@ export const useProductCustomInputs = (container) => {
         }
 
         input.addEventListener('input', onInputDataChange);
+        onInputDataChange({ target: input }); // Initialize with current value
 
         return () => input.removeEventListener('input', onInputDataChange);
     });
@@ -27,6 +28,9 @@ export const useProductCustomInputs = (container) => {
 
     function onInputDataChange(event) {
         const input = event.target;
+        if (!!input.dataset.locale && !input.checkVisibility()) {
+            return;
+        }
         const key = input.name;
         const value = input.value;
         const label = formatInputValue(value, input.dataset.formatting);

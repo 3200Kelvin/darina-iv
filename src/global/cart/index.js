@@ -8,17 +8,18 @@ import {
 } from "../../common/productCustomization";
 
 export const useCartCustomization = () => {
-    const cart = document.querySelector('.cart');
-    if (!cart) {
+    const carts = document.querySelectorAll('.cart .cart__list');
+    if (!carts?.length) {
         return;
     }
 
-    const cartList = cart.querySelector('.cart__list');
     let currentCustomizationData = {};
     let customizationData = getProductCustomizationData();
 
-    const cartListMutationObserver = new MutationObserver(onCartListMutation);
-    cartListMutationObserver.observe(cartList, { childList: true });
+    const cartListMutationObserver = new MutationObserver(onCartListMutations);
+    carts.forEach((cartList) => {
+        cartListMutationObserver.observe(cartList, { childList: true });
+    });
 
     window.addEventListener('message', onWindowMessage);
 
@@ -37,18 +38,22 @@ export const useCartCustomization = () => {
         currentCustomizationData = { ...data };
     }
 
-    function saveCustomizationData() {
+    function saveCustomizationData(cartList) {
         redrawCartItems(cartList, customizationData);
         setProductCustomizationData(customizationData);
         sendCartItemsUpdate(customizationData);
     }
 
-    function onCartListMutation() {
-        const cartItems = cartList.querySelectorAll('.cart__item');
+    function onCartListMutations(entries) {
+        entries.forEach(({ target }) => onCartListMutation(target));
+    }
 
-        if (!cartItems.length) {
+    function onCartListMutation(cartList) {
+        const cartItems = cartList?.querySelectorAll?.('.cart__item');
+
+        if (!cartItems?.length) {
             customizationData = {};
-            saveCustomizationData();
+            saveCustomizationData(cartList);
             return;
         }
 
@@ -80,6 +85,6 @@ export const useCartCustomization = () => {
             }
         });
 
-        saveCustomizationData();
+        saveCustomizationData(cartList);
     }
 };
